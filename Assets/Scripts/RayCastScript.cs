@@ -9,6 +9,9 @@ public class RayCastScript : MonoBehaviour
     [SerializeField]
     private PhotonViewDetector m_viewDetector;
 
+    [SerializeField]
+    private TurnManager m_turnManager;
+
     private Clickmode clickmode;
     private GameObject selectedpiece;
 
@@ -19,6 +22,12 @@ public class RayCastScript : MonoBehaviour
 
     public void Update()
     {
+        // 通信対戦用
+        if (PhotonNetwork.InRoom)
+        {
+            // 自分のターンではなかったらリターン
+            if (!m_turnManager.IsMyTurn()) return;
+        }
         if (Input.GetMouseButtonDown(0)) // 左クリック
         {
             if (clickmode == Clickmode.clickpiece)
@@ -49,6 +58,7 @@ public class RayCastScript : MonoBehaviour
                         selectedpiece.transform.position = new Vector3(colliderposition.x, colliderposition.y, selectedpiece.transform.position.z);
                         selectedpiece = null;
                         clickmode = Clickmode.clickpiece;
+                        m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
                     }
                 }
             }

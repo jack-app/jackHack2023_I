@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Camera m_camera;
 
+    [SerializeField]
+    private TurnManager m_turnManager;
+
     private void Awake()
     {
         if (PhotonNetwork.InRoom)
@@ -36,7 +39,7 @@ public class GameManager : MonoBehaviour
                 m_camera.transform.rotation = new Quaternion(0, 0, 1, 0);
                 PhotonNetwork.Instantiate("Piece", pos, new Quaternion(0, 0, 1, 0));
             }
-            
+            m_turnManager.StartTurn();
         }
     }
 
