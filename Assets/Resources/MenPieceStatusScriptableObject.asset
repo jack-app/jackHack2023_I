@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9fc9fc2c13486449a6816c3e18fbc50, type: 3}
-  m_Name: New Piece Status Scriptable Object
+  m_Name: MenPieceStatusScriptableObject
   m_EditorClassIdentifier: 
   list:
   - name: Charao
     num: 1
     prefab: {fileID: 7075774322623872534, guid: 254bc6e777966214cafe47572d14173f, type: 3}
-    Position: {x: 0, y: 0, z: -1}
-  - name: Onesan
+    Position: {x: -4, y: -8, z: -1}
+  - name: Majimekun
     num: 2
-    prefab: {fileID: 628809512913436159, guid: 0fdb0408aacfdbf47b2f9d177dc6ed9b, type: 3}
-    Position: {x: -5, y: 0, z: -1}
-  - name: Gal
+    prefab: {fileID: 4107034583491440234, guid: 5a97c716119d47c4680d372a039ce414, type: 3}
+    Position: {x: 0, y: -8, z: -1}
+  - name: Otaku
     num: 3
-    prefab: {fileID: 7473812393790109326, guid: c60e1ab778f30aa4995fab63add3bd02, type: 3}
-    Position: {x: 5, y: 0, z: -1}
+    prefab: {fileID: 6012134567651275618, guid: 0170df77478130f4798cb400c7b9a8bf, type: 3}
+    Position: {x: 4, y: -8, z: -1}
