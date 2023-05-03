@@ -5,12 +5,18 @@ using UnityEngine;
 
 public class RayCastScript : MonoBehaviour
 {
-    float x = 0.0f;
-    float y = 0.0f;
-    float z = 0.0f;
+
     Clickmode clickmode;
 
-    private void Update()
+    private GameObject selectedpiece;
+    private void Start()
+    {
+
+        clickmode = Clickmode.clickpiece;
+
+    }
+
+    public void Update()
     {
         if (Input.GetMouseButtonDown(0)) // 左クリック
         {
@@ -23,7 +29,7 @@ public class RayCastScript : MonoBehaviour
                     if (hitpiece.collider.CompareTag("Piece")) // タグを比較
                     {
                         Debug.Log(hitpiece.collider.gameObject.transform.position);//座標のログを出す
-
+                        selectedpiece = hitpiece.collider.gameObject;
                         clickmode = Clickmode.clickboard;
                     }
                 }
@@ -38,9 +44,9 @@ public class RayCastScript : MonoBehaviour
                     if (hitboard.collider.CompareTag("Board")) // タグを比較
                     {
                         Debug.Log(hitboard.collider.gameObject.transform.position);//座標のログを出す
-                        float x = hitboard.collider.gameObject.transform.position.x;
-                        float y = hitboard.collider.gameObject.transform.position.y;
-                        float z = hitboard.collider.gameObject.transform.position.z;
+                        Vector2 colliderposition = hitboard.collider.gameObject.transform.position;
+                        selectedpiece.transform.position = new Vector3(colliderposition.x, colliderposition.y, selectedpiece.transform.position.z);
+                        selectedpiece = null;
                         clickmode = Clickmode.clickpiece;
                     }
 
@@ -55,11 +61,7 @@ public class RayCastScript : MonoBehaviour
         clickboard,
     }
 
-    private void Start()
-    {
-
-        clickmode = Clickmode.clickpiece;
-    }
+ 
 }
 
 
