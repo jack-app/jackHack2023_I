@@ -6,6 +6,9 @@ using Photon.Realtime;
 
 public class PhotonQuickMatching : MonoBehaviourPunCallbacks
 {
+    [SerializeField]
+    private int m_maxPlayers = 2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +26,7 @@ public class PhotonQuickMatching : MonoBehaviourPunCallbacks
         // 参加できるルームがなかったら新規でルームを作成する
         // ルームの参加人数を設定する
         var roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 5;
+        roomOptions.MaxPlayers = (byte)m_maxPlayers;
 
         PhotonNetwork.CreateRoom(null, roomOptions);
     }
