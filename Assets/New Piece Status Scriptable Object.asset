@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9fc9fc2c13486449a6816c3e18fbc50, type: 3}
+  m_Name: New Piece Status Scriptable Object
+  m_EditorClassIdentifier: 
+  list:
+  - name: Charao
+    num: 1
+    prefab: {fileID: 7075774322623872534, guid: 254bc6e777966214cafe47572d14173f, type: 3}
+    Position: {x: 0, y: 0, z: -1}
+  - name: Onesan
+    num: 2
+    prefab: {fileID: 628809512913436159, guid: 0fdb0408aacfdbf47b2f9d177dc6ed9b, type: 3}
+    Position: {x: -5, y: 0, z: -1}
+  - name: Gal
+    num: 3
+    prefab: {fileID: 7473812393790109326, guid: c60e1ab778f30aa4995fab63add3bd02, type: 3}
+    Position: {x: 5, y: 0, z: -1}

@@ -23,7 +23,7 @@ public class TurnManager : MonoBehaviourPun, IPunTurnManagerCallbacks
     private int m_turnCount;
 
     // Start is called before the first frame update
-    private void Start()
+    private void Awake()
     {
         m_punTurnManager = GetComponent<PunTurnManager>();
         m_punTurnManager.TurnManagerListener = this;
@@ -89,20 +89,27 @@ public class TurnManager : MonoBehaviourPun, IPunTurnManagerCallbacks
         m_punTurnManager.SendMove(null, true);
     }
 
+    /// <summary>
+    /// é©ï™ÇÃÉ^Å[ÉìÇ©Ç«Ç§Ç©ÇîªíËÇ∑ÇÈ
+    /// </summary>
+    /// <returns></returns>
+    public bool IsMyTurn()
+    {
+        if ((m_punTurnManager.Turn % 2) + 1 == PhotonNetwork.LocalPlayer.ActorNumber) return true;
+        return false;
+    }
+
     [PunRPC]
     public void RPC_AutomaticSend()
     {
-        Debug.Log(m_punTurnManager.Turn);
-        Debug.Log((m_punTurnManager.Turn % 2) + 1);
-        Debug.Log(PhotonNetwork.LocalPlayer.ActorNumber);
-        if ((m_punTurnManager.Turn % 2) + 1 == PhotonNetwork.LocalPlayer.ActorNumber)
+        if (IsMyTurn())
         {
-            m_punTurnManager.SendMove(null, true);
-            m_waitingText.text = "wait for another player ...";
+            m_waitingText.text = "";
         }
         else
         {
-            m_waitingText.text = "";
+            m_punTurnManager.SendMove(null, true);
+            m_waitingText.text = "wait for another player ...";
         }
     }
 }
