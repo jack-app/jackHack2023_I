@@ -1,26 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Piece_hizumo : MonoBehaviour
 {
-    public bool isCalledOnce;
-    public void Update()
-    {
-        Debug.Log(isCalledOnce);
-        if (gameObject.tag == "Move")
-        {
-            Debug.Log(gameObject.tag);
-            
-            if (isCalledOnce == true)
-            {
-                transform.position = new Vector3(3.0f, 3.0f, 0.0f);
-                gameObject.tag = "Piece";
-                isCalledOnce = false;
-               
-            }
-        }
+    public GameObject prefab; // 生成するオブジェクトのPrefabをInspectorで指定する
 
+    private void PlaceObject()
+    {
+        // 元のオブジェクトの位置と回転を取得する
+        Vector3 position = transform.position;
+        Quaternion rotation = transform.rotation;
+
+        // 新しいオブジェクトを生成する
+        GameObject newObject = Instantiate(prefab, position, rotation);
+
+        Destroy(gameObject);
+    }
+
+    // テスト用にキーボードのスペースキーを押した時に新しいオブジェクトを生成する
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            PlaceObject();
+        }
     }
 }
