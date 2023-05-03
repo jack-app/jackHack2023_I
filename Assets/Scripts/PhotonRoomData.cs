@@ -4,11 +4,18 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 public class PhotonRoomData : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private TextMeshProUGUI m_TextMeshPro;
+
+    [SerializeField]
+    private GameObject m_startButton;
+
+    [SerializeField]
+    private string m_gameSceneName = "Main";
 
     private bool m_joinedRoom = false;
 
@@ -23,6 +30,22 @@ public class PhotonRoomData : MonoBehaviourPunCallbacks
         if (m_joinedRoom)
         {
             m_TextMeshPro.text = "RoomMember: " + PhotonNetwork.PlayerList.Length.ToString();
+            if (PhotonNetwork.IsMasterClient)
+            {
+                m_startButton.SetActive(true);
+            }
         }
+    }
+
+    public void GameStartButton()
+    {
+        photonView.RPC(nameof(RPC_GameStart), RpcTarget.AllViaServer);
+    }
+
+    [PunRPC]
+    public void RPC_GameStart()
+    {
+        PhotonNetwork.IsMessageQueueRunning = false;
+        SceneManager.LoadSceneAsync(m_gameSceneName);
     }
 }
