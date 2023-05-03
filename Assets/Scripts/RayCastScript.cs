@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,15 +6,15 @@ using UnityEngine;
 
 public class RayCastScript : MonoBehaviour
 {
+    [SerializeField]
+    private PhotonViewDetector m_viewDetector;
 
-    Clickmode clickmode;
-
+    private Clickmode clickmode;
     private GameObject selectedpiece;
+
     private void Start()
     {
-
         clickmode = Clickmode.clickpiece;
-
     }
 
     public void Update()
@@ -28,12 +29,12 @@ public class RayCastScript : MonoBehaviour
                 {
                     if (hitpiece.collider.CompareTag("Piece")) // タグを比較
                     {
+                        if (!m_viewDetector.IsMyObject(hitpiece.collider.GetComponent<PhotonView>())) return; // 通信対戦で相手のコマは選択されない
                         Debug.Log(hitpiece.collider.gameObject.transform.position);//座標のログを出す
                         selectedpiece = hitpiece.collider.gameObject;
                         clickmode = Clickmode.clickboard;
                     }
                 }
-
             }
             else if (clickmode == Clickmode.clickboard)
             {
@@ -49,7 +50,6 @@ public class RayCastScript : MonoBehaviour
                         selectedpiece = null;
                         clickmode = Clickmode.clickpiece;
                     }
-
                 }
             }
         }
@@ -60,8 +60,6 @@ public class RayCastScript : MonoBehaviour
         clickpiece,
         clickboard,
     }
-
- 
 }
 
 
