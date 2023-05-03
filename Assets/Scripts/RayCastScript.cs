@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,19 +6,28 @@ using UnityEngine;
 
 public class RayCastScript : MonoBehaviour
 {
+    [SerializeField]
+    private PhotonViewDetector m_viewDetector;
 
-    Clickmode clickmode;
+    [SerializeField]
+    private TurnManager m_turnManager;
 
+    private Clickmode clickmode;
     private GameObject selectedpiece;
+
     private void Start()
     {
-
         clickmode = Clickmode.clickpiece;
-
     }
 
     public void Update()
     {
+        // 通信対戦用
+        if (PhotonNetwork.InRoom)
+        {
+            // 自分のターンではなかったらリターン
+            if (!m_turnManager.IsMyTurn()) return;
+        }
         if (Input.GetMouseButtonDown(0)) // 左クリック
         {
             if (clickmode == Clickmode.clickpiece)
@@ -28,12 +38,12 @@ public class RayCastScript : MonoBehaviour
                 {
                     if (hitpiece.collider.CompareTag("Piece")) // タグを比較
                     {
+                        if (!m_viewDetector.IsMyObject(hitpiece.collider.GetComponent<PhotonView>())) return; // 通信対戦で相手のコマは選択されない
                         Debug.Log(hitpiece.collider.gameObject.transform.position);//座標のログを出す
                         selectedpiece = hitpiece.collider.gameObject;
                         clickmode = Clickmode.clickboard;
                     }
                 }
-
             }
             else if (clickmode == Clickmode.clickboard)
             {
@@ -48,8 +58,8 @@ public class RayCastScript : MonoBehaviour
                         selectedpiece.transform.position = new Vector3(colliderposition.x, colliderposition.y, selectedpiece.transform.position.z);
                         selectedpiece = null;
                         clickmode = Clickmode.clickpiece;
+                        m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
                     }
-
                 }
             }
         }
@@ -60,8 +70,6 @@ public class RayCastScript : MonoBehaviour
         clickpiece,
         clickboard,
     }
-
- 
 }
 
 
