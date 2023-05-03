@@ -15,11 +15,13 @@ public class PieceManager : MonoBehaviour
     // テスト用にキーボードのスペースキーを押した時に関数を呼び出す
     private void Update()
     {
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Space))
         {
             PieceStatusScriptableObject pieceStatusScriptableObject = AssetDatabase.LoadAssetAtPath<PieceStatusScriptableObject>(filePath);
             CreateMyPieces(pieceStatusScriptableObject);
         }
+#endif
     }
 
     public void CreateMyPieces(PieceStatusScriptableObject pieceStatusScriptableObject)
