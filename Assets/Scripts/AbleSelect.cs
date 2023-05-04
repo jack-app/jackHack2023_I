@@ -53,6 +53,22 @@ public class AbleSelect : MonoBehaviour
                             clickmode = Clickmode.clickpiece;
                         }
                     }
+                    else
+                    {
+                        foreach (Transform child in transform)//子オブジェクトを非アクティブにする
+                        {
+                            child.gameObject.SetActive(false);
+                            clickmode = Clickmode.clickpiece;
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (Transform child in transform)//子オブジェクトを非アクティブにする
+                    {
+                        child.gameObject.SetActive(false);
+                        clickmode = Clickmode.clickpiece;
+                    }
                 }
             }
             

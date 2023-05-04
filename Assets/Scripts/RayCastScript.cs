@@ -67,6 +67,16 @@ public class RayCastScript : MonoBehaviour
                             m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
                         }
                     }
+                    else
+                    {
+                        selectedpiece = null;
+                        clickmode = Clickmode.clickpiece;
+                    }
+                }
+                else
+                {
+                    selectedpiece = null;
+                    clickmode = Clickmode.clickpiece;
                 }
             }
         }
