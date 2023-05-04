@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using Photon.Pun;
-using UnityEditor.U2D.Animation;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPun
 {
     [SerializeField]
     private Camera m_camera;
@@ -48,9 +46,31 @@ public class GameManager : MonoBehaviour
     }
 
     public void ButtleMove(CharacterStatus status)
-    {
-        CharacterStatus enemystatus = m_battleManager.SearchEnemy(status.gameObject.transform.position);
+    {        
+        CharacterStatus enemystatus = m_battleManager.SearchEnemy(status);
+        if (enemystatus == null) 
+        {
+            m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
+            return;
+        }
+        Debug.Log(enemystatus.gameObject.name);
+        Vector2Int piecePos = FieldManager.Instance.ConvertRealPosToArrayPos(enemystatus.gameObject.transform.position);
         int battleresult = m_battleManager.Battle(status, enemystatus);
         Debug.Log(battleresult);
+        switch (battleresult)
+        {
+            case 0:
+                enemystatus.GetComponent<ManageMyObj>().DestroyMyObj();
+                FieldManager.Instance.SetPieceToField(piecePos.x, piecePos.y, PhotonNetwork.LocalPlayer.ActorNumber);
+                m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
+                break;
+            case 1:
+                status.GetComponent<ManageMyObj>().DestroyMyObj();
+                FieldManager.Instance.SetPieceToField(piecePos.x, piecePos.y, PhotonNetwork.LocalPlayer.GetNextFor(PhotonNetwork.LocalPlayer.ActorNumber).ActorNumber);
+                m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
+                break;
+            default:
+                break;
+        }
     }
 }

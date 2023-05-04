@@ -15,13 +15,13 @@ MonoBehaviour:
   list:
   - name: OL
     num: 1
-    prefab: {fileID: 2380409413848004575, guid: f4ae00574440be8478d5b61c3885af04, type: 3}
+    prefab: {fileID: 8266194013289885858, guid: f6ba61b17b5ad6c49b4093371b1996fd, type: 3}
     Position: {x: -4, y: -8, z: -1}
   - name: Onesan
     num: 2
-    prefab: {fileID: 273872954135358779, guid: 4ea47dfa7d7050546a5b5fa59470512a, type: 3}
+    prefab: {fileID: 3719524863203769687, guid: 9a5df060bde317a428bec0491e43be60, type: 3}
     Position: {x: 0, y: -8, z: -1}
   - name: Gal
     num: 3
-    prefab: {fileID: 8851039157939346372, guid: ff7de2b7a5597824eb9362835577a0f0, type: 3}
+    prefab: {fileID: 7998083144102573016, guid: b5489fdfce4a54e40bdc5909b66d3e00, type: 3}
     Position: {x: 4, y: -8, z: -1}
