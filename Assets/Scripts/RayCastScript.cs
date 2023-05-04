@@ -79,7 +79,15 @@ public class RayCastScript : MonoBehaviour
                             Vector2Int afterpos = FieldManager.Instance.ConvertRealPosToArrayPos(selectedpiece.transform.position);
                             FieldManager.Instance.RemovePieceToField(prevpos.x, prevpos.y);
                             FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, afterpos.x, afterpos.y);
-                            m_gameManager.CheckBattle();
+                            // もし二つのコマが同じ位置に来たら
+                            if (FieldManager.Instance.CheckBattle(afterpos.x, afterpos.y))
+                            {
+
+                            }
+                            else
+                            {
+                                m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
+                            }
                         }
                     }
                 }

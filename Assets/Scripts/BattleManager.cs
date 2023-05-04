@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class BattleManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public CharacterStatus SearchEnemy(Vector2 pos)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GameObject[] pieces = GameObject.FindGameObjectsWithTag("Piece");
+        foreach (GameObject piece in pieces)
+        {
+            if (Vector2.Distance(pos, piece.transform.position) < 0.1f)
+            {
+                return piece.GetComponent<CharacterStatus>();
+            }
+        }
+        return null;
     }
 
     public int Battle(CharacterStatus a, CharacterStatus b)
