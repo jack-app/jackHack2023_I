@@ -58,14 +58,20 @@ public class RayCastScript : MonoBehaviour
                     if (hitboard.collider.CompareTag("Board")) // タグを比較
                     {
                         Debug.Log(hitboard.collider.gameObject.transform.position);//座標のログを出す
-                        Vector2 colliderposition = hitboard.collider.gameObject.transform.position;
-                        selectedpiece.transform.position = new Vector3(colliderposition.x, colliderposition.y, selectedpiece.transform.position.z);
-                        selectedpiece = null;
-                        clickmode = Clickmode.clickpiece;
+                        Vector3 colliderposition = hitboard.collider.gameObject.transform.position;
+                        Vector3 prevposition  = selectedpiece.transform.position;
+                        selectedpiece.transform.position = new Vector3(colliderposition.x, colliderposition.y, prevposition.z);                       
                         if (PhotonNetwork.InRoom)
                         {
+                            //コマを移動を配列に同期させる
+                            Vector2Int prevpos  = FieldManager.Instance.ConvertRealPosToArrayPos(prevposition);
+                            Vector2Int afterpos = FieldManager.Instance.ConvertRealPosToArrayPos(selectedpiece.transform.position);
+                            FieldManager.Instance.RemovePieceToField(prevpos.x, prevpos.y);
+                            FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, afterpos.x, afterpos.y);
                             m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
                         }
+                        selectedpiece = null;
+                        clickmode = Clickmode.clickpiece;
                     }
                     else
                     {
