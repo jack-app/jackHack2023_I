@@ -21,7 +21,7 @@ public class Piece_hizumo : MonoBehaviour
     private void Update()
     {
         
-        GameObject[] tmp = GameObject.FindGameObjectsWithTag("ChangeBoard");
+        GameObject[] tmp = GameObject.FindGameObjectsWithTag("Change");
         Vector3 posi = this.transform.position;//©g‚ÌÀ•W‚ğæ“¾
         for (int i = 0; i < tmp.Length; i++)
         {
