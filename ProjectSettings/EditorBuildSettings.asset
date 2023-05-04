@@ -6,12 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MatchTest.unity
-    guid: 4047b71f61de0a247bd463f98107d900
+    path: Assets/Scenes/Start_yokoshi.unity
+    guid: 8271503b7ccbe86439fd466940dd3211
+  - enabled: 1
+    path: Assets/Scenes/Matching.unity
+    guid: 45f29f820ef94ef4786038b11c99b8de
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: daf5b5e03c8e0694cb427ba41d3f53e0
   - enabled: 1
     path: Assets/Scenes/TurnManaging.unity
     guid: bbd8b31faab926f4a82fc9f71495a82e
   - enabled: 1
-    path: Assets/Scenes/Main.unity
-    guid: daf5b5e03c8e0694cb427ba41d3f53e0
+    path: Assets/Scenes/MatchTest.unity
+    guid: 4047b71f61de0a247bd463f98107d900
   m_configObjects: {}
