@@ -45,6 +45,9 @@ MonoBehaviour:
   - RPC_SetPieceToField
   - RPC_PlaySE
   - RPC_DestroyMyObj
+  - RPC_JudgeGameEnd
+  - ShowResult
+  - RPC_ShowResult
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

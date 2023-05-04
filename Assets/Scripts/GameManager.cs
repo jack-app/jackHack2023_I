@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviourPun
     private BattleManager m_battleManager;
 
     [SerializeField]
+    private ResultManager m_resultManager;
+
+    [SerializeField]
     private PieceStatusScriptableObject[] pieceStatusScriptableObjects = new PieceStatusScriptableObject[2];
 
     private void Awake()
@@ -61,7 +64,7 @@ public class GameManager : MonoBehaviourPun
         {
             case 0:
                 enemystatus.GetComponent<ManageMyObj>().DestroyMyObj();
-                FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, piecePos.x, piecePos.y);
+                FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, piecePos.x, piecePos.y);                
                 m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
                 break;
             case 1:
@@ -71,6 +74,37 @@ public class GameManager : MonoBehaviourPun
                 break;
             default:
                 break;
+        }
+        photonView.RPC(nameof(RPC_JudgeGameEnd), RpcTarget.AllViaServer);
+    }
+
+    [PunRPC]
+    public void RPC_JudgeGameEnd()
+    {
+        if (!PhotonNetwork.IsMasterClient) return;
+        int p1PieceCount = 0;
+        int p2PieceCount = 0;
+        for (int y = 0; y < FieldData.FIELD_LENGTH; y++)
+        {
+            for (int x = 0; x < FieldData.FIELD_LENGTH; x++)
+            {
+                int piecenum = FieldManager.Instance.GetPieceToField(x, y);
+                if (piecenum == 1) { p1PieceCount++; }
+                if(piecenum == 2) { p2PieceCount++; }
+            }
+        }
+        // 引き分け0, 他、勝ったほうの番号渡す
+        if (p1PieceCount == 0 && p1PieceCount == 0)
+        {
+            m_resultManager.ShowResult(0);
+        }
+        else if (p1PieceCount == 0)
+        {
+            m_resultManager.ShowResult(2);
+        }
+        else if (p2PieceCount == 0)
+        {
+            m_resultManager.ShowResult(1);
         }
     }
 }
