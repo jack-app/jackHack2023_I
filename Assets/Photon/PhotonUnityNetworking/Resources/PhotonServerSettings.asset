@@ -43,6 +43,7 @@ MonoBehaviour:
   - RPC_GameStart
   - RPC_RemovePieceToField
   - RPC_SetPieceToField
+  - RPC_PlaySE
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

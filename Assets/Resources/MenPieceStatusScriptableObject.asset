@@ -15,13 +15,13 @@ MonoBehaviour:
   list:
   - name: Charao
     num: 1
-    prefab: {fileID: 7075774322623872534, guid: 254bc6e777966214cafe47572d14173f, type: 3}
+    prefab: {fileID: 545748753161580350, guid: 243fbe617f0b53840bb9f122a8a17a59, type: 3}
     Position: {x: -4, y: -8, z: -1}
   - name: Majimekun
     num: 2
-    prefab: {fileID: 4107034583491440234, guid: 5a97c716119d47c4680d372a039ce414, type: 3}
+    prefab: {fileID: 7348114591150636495, guid: 655d96fe06a3dc64d9194052efd9938f, type: 3}
     Position: {x: 0, y: -8, z: -1}
   - name: Otaku
     num: 3
-    prefab: {fileID: 6012134567651275618, guid: 0170df77478130f4798cb400c7b9a8bf, type: 3}
+    prefab: {fileID: 1837105240981296406, guid: 0209d24af53b49a4b8bcc4396b44c07b, type: 3}
     Position: {x: 4, y: -8, z: -1}
