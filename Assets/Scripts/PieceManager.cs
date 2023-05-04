@@ -2,7 +2,7 @@ using Photon.Pun;
 using UnityEditor;
 using UnityEngine;
 
-public class PieceManager : MonoBehaviour
+public class PieceManager : MonoBehaviourPun
 {
     GameObject prefabi;
     Vector3 positioni;
@@ -44,10 +44,12 @@ public class PieceManager : MonoBehaviour
                     PhotonNetwork.Instantiate(prefabi.name, positioni, Quaternion.identity);
                 }
                 else
-                {
+                {                
                     positioni = Player2Transform.ConvertPosition(positioni);
                     PhotonNetwork.Instantiate(prefabi.name, positioni, new Quaternion(0, 0, 1, 0));
                 }
+                Vector2Int pos = FieldManager.Instance.ConvertRealPosToArrayPos(positioni);
+                FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, pos.x, pos.y);
             }
             // ‚»‚êˆÈŠO
             else
