@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Piece_hizumo : MonoBehaviour
@@ -19,6 +20,7 @@ public class Piece_hizumo : MonoBehaviour
         {
             PhotonNetwork.Instantiate(prefab.name, position, rotation);
             gameObject.GetComponent<ManageMyObj>().DestroyMyObj();
+            NaruEffect.Instance.PlayEffect((int)position.x, (int)position.y, (int)position.z);
         }
         else
         {
