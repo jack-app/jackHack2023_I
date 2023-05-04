@@ -48,6 +48,7 @@ MonoBehaviour:
   - RPC_JudgeGameEnd
   - ShowResult
   - RPC_ShowResult
+  - RPC_PlayEffect
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

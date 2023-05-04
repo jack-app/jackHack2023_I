@@ -50,7 +50,6 @@ public class RayCastScript : MonoBehaviour
                         {
                             if (!m_viewDetector.IsMyObject(hitpiece.collider.GetComponent<PhotonView>())) return;
                         }
-                        Debug.Log(hitpiece.collider.gameObject.transform.position);//座標のログを出す
                         selectedpiece = hitpiece.collider.gameObject;
                         ableSelect = selectedpiece.GetComponentInChildren<AbleSelect>();
                         ableSelect.ActivateBoard();
@@ -66,7 +65,6 @@ public class RayCastScript : MonoBehaviour
                 {
                     if (hitboard.collider.CompareTag("Board")) // タグを比較
                     {
-                        Debug.Log(hitboard.collider.gameObject.transform.position);//座標のログを出す
                         Vector3 colliderposition = hitboard.collider.gameObject.transform.position;
                         Vector3 prevposition  = selectedpiece.transform.position;
                         selectedpiece.transform.position = new Vector3(colliderposition.x, colliderposition.y, prevposition.z);
