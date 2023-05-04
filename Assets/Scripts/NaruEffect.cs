@@ -26,9 +26,7 @@ public class NaruEffect : MonoBehaviourPun
     [PunRPC]
     public void RPC_PlayEffect(int x, int y, int z)
     {
-        if (!PhotonNetwork.IsMasterClient) return;
         Particle.transform.localPosition = new Vector3(x, y, 0);
-        Debug.Log(Particle.transform.position);
         _particleSystem.Play();
         _particleSystem1.Play();
         _particleSystem2.Play();

@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviourPun
     private ResultManager m_resultManager;
 
     [SerializeField]
+    private DirectionManager m_directionManager;
+
+    [SerializeField]
     private PieceStatusScriptableObject[] pieceStatusScriptableObjects = new PieceStatusScriptableObject[2];
 
     private void Awake()
@@ -64,17 +67,23 @@ public class GameManager : MonoBehaviourPun
         {
             case 0:
                 enemystatus.GetComponent<ManageMyObj>().DestroyMyObj();
-                FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, piecePos.x, piecePos.y);                
-                m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
+                FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, piecePos.x, piecePos.y);                                
                 break;
             case 1:
                 status.GetComponent<ManageMyObj>().DestroyMyObj();
                 FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.GetNextFor(PhotonNetwork.LocalPlayer.ActorNumber).ActorNumber, piecePos.x, piecePos.y);
-                m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
+                break;
+            case 3:
+                // インテリとキャリアウーマンの駆け落ち
+                status.GetComponent<ManageMyObj>().DestroyMyObj();
+                enemystatus.GetComponent<ManageMyObj>().DestroyMyObj();
+                FieldManager.Instance.SetPieceToField(0, piecePos.x, piecePos.y);
+                m_directionManager.WomanInteri();
                 break;
             default:
                 break;
         }
+        m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
         photonView.RPC(nameof(RPC_JudgeGameEnd), RpcTarget.AllViaServer);
     }
 
@@ -93,8 +102,9 @@ public class GameManager : MonoBehaviourPun
                 if(piecenum == 2) { p2PieceCount++; }
             }
         }
+        Debug.Log("1P" + p1PieceCount + ", 2P" + p2PieceCount);
         // 引き分け0, 他、勝ったほうの番号渡す
-        if (p1PieceCount == 0 && p1PieceCount == 0)
+        if (p1PieceCount == 0 && p2PieceCount == 0)
         {
             m_resultManager.ShowResult(0);
         }
