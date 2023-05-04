@@ -68,7 +68,7 @@ public class RayCastScript : MonoBehaviour
                         Vector3 prevposition  = selectedpiece.transform.position;
                         selectedpiece.transform.position = new Vector3(colliderposition.x, colliderposition.y, prevposition.z);
                         // コマを指す音を鳴らす
-                        m_photonPlaySE.PlaySE();
+                        //m_photonPlaySE.PlaySE();
                         if (PhotonNetwork.InRoom)
                         {
                             //コマを移動を配列に同期させる
