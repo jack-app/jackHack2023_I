@@ -12,8 +12,12 @@ public class RayCastScript : MonoBehaviour
     [SerializeField]
     private TurnManager m_turnManager;
 
+    [SerializeField]
+    private PhotonPlaySE m_photonPlaySE;
+
     private Clickmode clickmode;
     private GameObject selectedpiece;
+    private AbleSelect ableSelect;
 
     private void Start()
     {
@@ -45,6 +49,8 @@ public class RayCastScript : MonoBehaviour
                         }
                         Debug.Log(hitpiece.collider.gameObject.transform.position);//座標のログを出す
                         selectedpiece = hitpiece.collider.gameObject;
+                        ableSelect = selectedpiece.GetComponentInChildren<AbleSelect>();
+                        ableSelect.ActivateBoard();
                         clickmode = Clickmode.clickboard;
                     }
                 }
@@ -58,26 +64,26 @@ public class RayCastScript : MonoBehaviour
                     if (hitboard.collider.CompareTag("Board")) // タグを比較
                     {
                         Debug.Log(hitboard.collider.gameObject.transform.position);//座標のログを出す
-                        Vector2 colliderposition = hitboard.collider.gameObject.transform.position;
-                        selectedpiece.transform.position = new Vector3(colliderposition.x, colliderposition.y, selectedpiece.transform.position.z);
-                        selectedpiece = null;
-                        clickmode = Clickmode.clickpiece;
+                        Vector3 colliderposition = hitboard.collider.gameObject.transform.position;
+                        Vector3 prevposition  = selectedpiece.transform.position;
+                        selectedpiece.transform.position = new Vector3(colliderposition.x, colliderposition.y, prevposition.z);
+                        // コマを指す音を鳴らす
+                        m_photonPlaySE.PlaySE();
                         if (PhotonNetwork.InRoom)
                         {
+                            //コマを移動を配列に同期させる
+                            Vector2Int prevpos  = FieldManager.Instance.ConvertRealPosToArrayPos(prevposition);
+                            Vector2Int afterpos = FieldManager.Instance.ConvertRealPosToArrayPos(selectedpiece.transform.position);
+                            FieldManager.Instance.RemovePieceToField(prevpos.x, prevpos.y);
+                            FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, afterpos.x, afterpos.y);
                             m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
                         }
                     }
-                    else
-                    {
-                        selectedpiece = null;
-                        clickmode = Clickmode.clickpiece;
-                    }
                 }
-                else
-                {
-                    selectedpiece = null;
-                    clickmode = Clickmode.clickpiece;
-                }
+                ableSelect.InActivateBoard();
+                ableSelect = null;
+                selectedpiece = null;
+                clickmode = Clickmode.clickpiece;
             }
         }
 

@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MatchTest.unity
     guid: 4047b71f61de0a247bd463f98107d900
+  - enabled: 0
+    path: Assets/Scenes/Main_hizumo.unity
+    guid: d4b6223068166cc49a34c838f81f016b
   m_configObjects: {}
