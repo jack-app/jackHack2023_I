@@ -9,6 +9,7 @@ TagManager:
   - Board
   - Move
   - NotBoard
+  - Change
   layers:
   - Default
   - TransparentFX

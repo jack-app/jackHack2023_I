@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Piece_hizumo : MonoBehaviour
 {
+
     public GameObject prefab; // 生成するオブジェクトのPrefabをInspectorで指定する
 
     private void PlaceObject()
@@ -16,12 +17,28 @@ public class Piece_hizumo : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // テスト用にキーボードのスペースキーを押した時に新しいオブジェクトを生成する
+    
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        
+        GameObject[] tmp = GameObject.FindGameObjectsWithTag("Change");
+        Vector3 posi = this.transform.position;//自身の座標を取得
+        for (int i = 0; i < tmp.Length; i++)
         {
-            PlaceObject();
+            float threshold = 0.1f; // 座標の差がこの値以下なら一致したとみなす
+            if (Vector2.Distance(tmp[i].transform.position, posi) < threshold)
+            {
+                PlaceObject();// コマを成らせる
+
+                //ChangeBoard という名前のオブジェクトを取得
+                GameObject obj = GameObject.Find("ChangeBoard");
+                // 指定したオブジェクトを削除
+                //Destroy(obj);
+            }
         }
     }
+
 }
+    
+    
+       

@@ -7,10 +7,13 @@ using UnityEngine;
 public class RayCastScript : MonoBehaviour
 {
     [SerializeField]
-    private PhotonViewDetector m_viewDetector;
+    private GameManager m_gameManager;
 
     [SerializeField]
     private TurnManager m_turnManager;
+
+    [SerializeField]
+    private PhotonViewDetector m_viewDetector;
 
     [SerializeField]
     private PhotonPlaySE m_photonPlaySE;
@@ -67,16 +70,24 @@ public class RayCastScript : MonoBehaviour
                         Vector3 colliderposition = hitboard.collider.gameObject.transform.position;
                         Vector3 prevposition  = selectedpiece.transform.position;
                         selectedpiece.transform.position = new Vector3(colliderposition.x, colliderposition.y, prevposition.z);
-                        // コマを指す音を鳴らす
-                        m_photonPlaySE.PlaySE();
                         if (PhotonNetwork.InRoom)
                         {
+                            // コマを指す音を鳴らす
+                            m_photonPlaySE.PlaySE();
                             //コマを移動を配列に同期させる
                             Vector2Int prevpos  = FieldManager.Instance.ConvertRealPosToArrayPos(prevposition);
                             Vector2Int afterpos = FieldManager.Instance.ConvertRealPosToArrayPos(selectedpiece.transform.position);
                             FieldManager.Instance.RemovePieceToField(prevpos.x, prevpos.y);
-                            FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, afterpos.x, afterpos.y);
-                            m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
+                            // もし二つのコマが同じ位置に来たら
+                            if (FieldManager.Instance.CheckBattle(afterpos.x, afterpos.y))
+                            {
+                                m_gameManager.ButtleMove(selectedpiece.GetComponent<CharacterStatus>());
+                            }
+                            else
+                            {
+                                FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, afterpos.x, afterpos.y);
+                                m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
+                            }
                         }
                     }
                 }
