@@ -41,7 +41,7 @@ public class FieldManager : MonoBehaviourPun
     private void RPC_SetPieceToField(int num, int x, int y)
     {
         m_field[x, y] = num;
-        Debug.Log(x + "," + y + "," + num);
+        Debug.Log("Set" + x + "," + y + "," + num);
     }
 
     public void RemovePieceToField(int x, int y)
@@ -52,11 +52,13 @@ public class FieldManager : MonoBehaviourPun
     [PunRPC]
     private void RPC_RemovePieceToField(int x, int y)
     {
+        Debug.Log("Remove" + x + "," + y);
         m_field[x, y] = 0;
     }
 
     public bool CheckBattle(int x, int y)
     {
+        if(PhotonNetwork.CurrentRoom.PlayerCount == 1) return false;
         // 相手のコマが配置されていたら
         if (GetPieceToField(x, y) == PhotonNetwork.LocalPlayer.GetNextFor(PhotonNetwork.LocalPlayer.ActorNumber).ActorNumber)
         {

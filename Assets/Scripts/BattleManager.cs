@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class BattleManager : MonoBehaviour
 {
-    public CharacterStatus SearchEnemy(Vector2 pos)
+    public CharacterStatus SearchEnemy(CharacterStatus status)
     {
+        Vector2 pos = status.gameObject.transform.position;
         GameObject[] pieces = GameObject.FindGameObjectsWithTag("Piece");
         foreach (GameObject piece in pieces)
         {
-            if (Vector2.Distance(pos, piece.transform.position) < 0.1f)
+            CharacterStatus enemystatus = piece.GetComponent<CharacterStatus>();
+            if (Vector2.Distance(pos, piece.transform.position) < 0.1f &&  status.characterType != enemystatus.characterType)
             {
-                return piece.GetComponent<CharacterStatus>();
+                return enemystatus;
             }
         }
         return null;
