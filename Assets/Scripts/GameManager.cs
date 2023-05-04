@@ -73,6 +73,12 @@ public class GameManager : MonoBehaviourPun
                 status.GetComponent<ManageMyObj>().DestroyMyObj();
                 FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.GetNextFor(PhotonNetwork.LocalPlayer.ActorNumber).ActorNumber, piecePos.x, piecePos.y);
                 break;
+            case 2:
+                // オタクとギャル
+                status.GetComponent<ManageMyObj>().DestroyMyObj();
+                FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.GetNextFor(PhotonNetwork.LocalPlayer.ActorNumber).ActorNumber, piecePos.x, piecePos.y);
+                m_directionManager.OtakuGal();
+                break;
             case 3:
                 // インテリとキャリアウーマンの駆け落ち
                 status.GetComponent<ManageMyObj>().DestroyMyObj();
