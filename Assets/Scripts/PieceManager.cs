@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PieceManager : MonoBehaviour
 {
     GameObject prefabi;
-    Vector3 Positioni;
+    Vector3 positioni;
 
     // ScriptableObjectのパスを指定（ScriptableObjectを右クリック>copy path取得できます。）
     string filePath = "Assets/New Piece Status Scriptable Object.asset";
@@ -32,16 +30,30 @@ public class PieceManager : MonoBehaviour
         for (int i = 0; i < listCount; i++)
         {
             prefabi = pieceStatusScriptableObject.list[i].prefab;//prefabの取得
-            Positioni = pieceStatusScriptableObject.list[i].Position;//Positionの取得
+            positioni = pieceStatusScriptableObject.list[i].Position;//Positionの取得
 
             Debug.Log("prefab:" + prefabi);
-            Debug.Log("Positon:" + Positioni);
+            Debug.Log("Positon:" + positioni);
 
             // 新しいオブジェクトを生成する
-            GameObject newObjecti = Instantiate(prefabi, Positioni, Quaternion.identity);
-
+            // 通信対戦の場合
+            if (PhotonNetwork.InRoom)
+            {
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    PhotonNetwork.Instantiate(prefabi.name, positioni, Quaternion.identity);
+                }
+                else
+                {
+                    positioni = Player2Transform.ConvertPosition(positioni);
+                    PhotonNetwork.Instantiate(prefabi.name, positioni, new Quaternion(0, 0, 1, 0));
+                }
+            }
+            // それ以外
+            else
+            {
+                GameObject newObjecti = Instantiate(prefabi, positioni, Quaternion.identity);
+            }
         }
-
     }
-
 }
