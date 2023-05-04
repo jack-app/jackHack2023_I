@@ -12,8 +12,12 @@ public class RayCastScript : MonoBehaviour
     [SerializeField]
     private TurnManager m_turnManager;
 
+    [SerializeField]
+    private PhotonPlaySE m_photonPlaySE;
+
     private Clickmode clickmode;
     private GameObject selectedpiece;
+    private AbleSelect ableSelect;
 
     private void Start()
     {
@@ -45,6 +49,8 @@ public class RayCastScript : MonoBehaviour
                         }
                         Debug.Log(hitpiece.collider.gameObject.transform.position);//座標のログを出す
                         selectedpiece = hitpiece.collider.gameObject;
+                        ableSelect = selectedpiece.GetComponentInChildren<AbleSelect>();
+                        ableSelect.ActivateBoard();
                         clickmode = Clickmode.clickboard;
                     }
                 }
@@ -60,7 +66,9 @@ public class RayCastScript : MonoBehaviour
                         Debug.Log(hitboard.collider.gameObject.transform.position);//座標のログを出す
                         Vector3 colliderposition = hitboard.collider.gameObject.transform.position;
                         Vector3 prevposition  = selectedpiece.transform.position;
-                        selectedpiece.transform.position = new Vector3(colliderposition.x, colliderposition.y, prevposition.z);                       
+                        selectedpiece.transform.position = new Vector3(colliderposition.x, colliderposition.y, prevposition.z);
+                        // コマを指す音を鳴らす
+                        m_photonPlaySE.PlaySE();
                         if (PhotonNetwork.InRoom)
                         {
                             //コマを移動を配列に同期させる
@@ -70,20 +78,12 @@ public class RayCastScript : MonoBehaviour
                             FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, afterpos.x, afterpos.y);
                             m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
                         }
-                        selectedpiece = null;
-                        clickmode = Clickmode.clickpiece;
-                    }
-                    else
-                    {
-                        selectedpiece = null;
-                        clickmode = Clickmode.clickpiece;
                     }
                 }
-                else
-                {
-                    selectedpiece = null;
-                    clickmode = Clickmode.clickpiece;
-                }
+                ableSelect.InActivateBoard();
+                ableSelect = null;
+                selectedpiece = null;
+                clickmode = Clickmode.clickpiece;
             }
         }
 
