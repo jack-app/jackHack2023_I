@@ -26,6 +26,10 @@ public class BattleManager : MonoBehaviour
         {
             return 2;
         }
+        else if (a.characterType == CharacterType.CareerWoman && b.characterType == CharacterType.Intelli || a.characterType == CharacterType.Intelli && b.characterType == CharacterType.CareerWoman)
+        {
+            return 3;
+        }
         else if((a.looks + a.money + a.intelligence + a.communication)* 1.5 >= (b.looks + b.money + b.intelligence + b.communication))
         {
             return 0;

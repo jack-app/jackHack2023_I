@@ -1,33 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class NaruEffect : MonoBehaviour
+public class NaruEffect : MonoBehaviourPun
 {
+    public static NaruEffect Instance { get; private set; }
+
     public ParticleSystem _particleSystem;
     public ParticleSystem _particleSystem1;
     public ParticleSystem _particleSystem2;
     public GameObject Particle;
-    public Camera _camera;
     public AudioSource _audioSource;
-    
-    // テスト用にキーボードのスペースキーを押した時に新しいオブジェクトを生成する
-    private void Update()
+
+    private void Awake()
     {
-        if (Input.GetMouseButton(0))
-        {
-            Vector3 mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
-            Debug.Log(mousePosition);
-            PlayEffect(mousePosition);
-        }
+        Instance = this;
     }
 
-    public void PlayEffect(Vector3 position)
+    public void PlayEffect(int x, int y, int z)
     {
-        Particle.transform.position = position;
+        photonView.RPC(nameof(RPC_PlayEffect), RpcTarget.AllViaServer, x, y, z);
+    }
+
+    [PunRPC]
+    public void RPC_PlayEffect(int x, int y, int z)
+    {
+        Particle.transform.localPosition = new Vector3(x, y, 0);
         _particleSystem.Play();
         _particleSystem1.Play();
         _particleSystem2.Play();
         _audioSource.Play();
+    }
+
+    private void OnDestroy()
+    {
+        Instance = null;
     }
 }
