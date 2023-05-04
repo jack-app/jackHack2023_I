@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEditor.U2D.Animation;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private PieceManager m_pieceManager;
+
+    [SerializeField]
+    private BattleManager m_battleManager;
 
     [SerializeField]
     private PieceStatusScriptableObject[] pieceStatusScriptableObjects = new PieceStatusScriptableObject[2];
@@ -43,14 +47,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ButtleMove(CharacterStatus status)
     {
-        
-    }
-
-    public void CheckBattle()
-    {
-        m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
+        CharacterStatus enemystatus = m_battleManager.SearchEnemy(status.gameObject.transform.position);
+        int battleresult = m_battleManager.Battle(status, enemystatus);
+        Debug.Log(battleresult);
     }
 }

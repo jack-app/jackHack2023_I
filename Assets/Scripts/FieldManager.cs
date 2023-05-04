@@ -55,6 +55,16 @@ public class FieldManager : MonoBehaviourPun
         m_field[x, y] = 0;
     }
 
+    public bool CheckBattle(int x, int y)
+    {
+        // 相手のコマが配置されていたら
+        if (GetPieceToField(x, y) == PhotonNetwork.LocalPlayer.GetNextFor(PhotonNetwork.LocalPlayer.ActorNumber).ActorNumber)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public void OnDestroy()
     {
         Instance = null;
