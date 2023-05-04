@@ -10,6 +10,8 @@ public class SpecialEvent : MonoBehaviour
     public GameObject Heart;
     public GameObject Laughed;
 
+    public GameObject ParentObj;
+
     [SerializeField]
     private int resultnumber;
 
@@ -94,6 +96,8 @@ public class SpecialEvent : MonoBehaviour
             Gal.SetActive(true);
             Otaku.SetActive(true);
             Laughed.SetActive(true);
+            yield return new WaitForSeconds(1);
+            ParentObj.SetActive(false);
         }
         else
         {
