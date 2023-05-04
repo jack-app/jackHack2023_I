@@ -7,10 +7,13 @@ using UnityEngine;
 public class RayCastScript : MonoBehaviour
 {
     [SerializeField]
-    private PhotonViewDetector m_viewDetector;
+    private GameManager m_gameManager;
 
     [SerializeField]
     private TurnManager m_turnManager;
+
+    [SerializeField]
+    private PhotonViewDetector m_viewDetector;
 
     [SerializeField]
     private PhotonPlaySE m_photonPlaySE;
@@ -76,7 +79,7 @@ public class RayCastScript : MonoBehaviour
                             Vector2Int afterpos = FieldManager.Instance.ConvertRealPosToArrayPos(selectedpiece.transform.position);
                             FieldManager.Instance.RemovePieceToField(prevpos.x, prevpos.y);
                             FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, afterpos.x, afterpos.y);
-                            m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
+                            m_gameManager.CheckBattle();
                         }
                     }
                 }

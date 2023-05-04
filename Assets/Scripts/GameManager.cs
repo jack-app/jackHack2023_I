@@ -48,4 +48,9 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    public void CheckBattle()
+    {
+        m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
+    }
 }
