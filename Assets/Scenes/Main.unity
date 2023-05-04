@@ -2056,8 +2056,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dee843d6b73da1b4fb339347b44555ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_viewDetector: {fileID: 773448086}
+  m_gameManager: {fileID: 773448085}
   m_turnManager: {fileID: 773448089}
+  m_viewDetector: {fileID: 773448086}
   m_photonPlaySE: {fileID: 1716932038}
 --- !u!114 &1716932034
 MonoBehaviour:
