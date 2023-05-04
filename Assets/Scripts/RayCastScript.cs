@@ -38,7 +38,11 @@ public class RayCastScript : MonoBehaviour
                 {
                     if (hitpiece.collider.CompareTag("Piece")) // タグを比較
                     {
-                        if (!m_viewDetector.IsMyObject(hitpiece.collider.GetComponent<PhotonView>())) return; // 通信対戦で相手のコマは選択されない
+                        // 通信対戦で相手のコマは選択されない
+                        if (PhotonNetwork.InRoom)
+                        {
+                            if (!m_viewDetector.IsMyObject(hitpiece.collider.GetComponent<PhotonView>())) return;
+                        }
                         Debug.Log(hitpiece.collider.gameObject.transform.position);//座標のログを出す
                         selectedpiece = hitpiece.collider.gameObject;
                         clickmode = Clickmode.clickboard;

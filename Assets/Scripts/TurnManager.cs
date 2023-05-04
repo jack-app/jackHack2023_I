@@ -33,8 +33,8 @@ public class TurnManager : MonoBehaviourPun, IPunTurnManagerCallbacks
     {
         if (PhotonNetwork.InRoom)
         {
-            m_turnText.text = "Turn: " + m_punTurnManager.Turn.ToString();
-            m_timerText.text = "Timer: " + m_punTurnManager.RemainingSecondsInTurn.ToString();
+            m_turnText.text = "ターン: " + m_punTurnManager.Turn.ToString();
+            m_timerText.text = "残り時間: " + m_punTurnManager.RemainingSecondsInTurn.ToString("F0");
         }
     }
 
@@ -109,7 +109,7 @@ public class TurnManager : MonoBehaviourPun, IPunTurnManagerCallbacks
         else
         {
             m_punTurnManager.SendMove(null, true);
-            m_waitingText.text = "wait for another player ...";
+            m_waitingText.text = "相手のターンです";
         }
     }
 }

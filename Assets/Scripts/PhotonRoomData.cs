@@ -15,6 +15,15 @@ public class PhotonRoomData : MonoBehaviourPunCallbacks
     private GameObject m_startButton;
 
     [SerializeField]
+    private GameObject m_waitText;
+
+    [SerializeField]
+    private GameObject m_matchingText;
+
+    [SerializeField] 
+    private GameObject m_matchedText;
+
+    [SerializeField]
     private string m_gameSceneName = "Main";
 
     private bool m_joinedRoom = false;
@@ -29,10 +38,16 @@ public class PhotonRoomData : MonoBehaviourPunCallbacks
     {
         if (m_joinedRoom)
         {
-            m_TextMeshPro.text = "RoomMember: " + PhotonNetwork.PlayerList.Length.ToString();
+            m_TextMeshPro.text = "ÉãÅ[ÉÄêlêî: " + PhotonNetwork.PlayerList.Length.ToString();
+            m_matchingText.SetActive(false);
+            m_matchedText.SetActive(true);
             if (PhotonNetwork.IsMasterClient)
             {
                 m_startButton.SetActive(true);
+            }
+            else
+            {
+                m_waitText.SetActive(true);
             }
         }
     }
