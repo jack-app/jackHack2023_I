@@ -62,7 +62,10 @@ public class RayCastScript : MonoBehaviour
                         selectedpiece.transform.position = new Vector3(colliderposition.x, colliderposition.y, selectedpiece.transform.position.z);
                         selectedpiece = null;
                         clickmode = Clickmode.clickpiece;
-                        m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
+                        if (PhotonNetwork.InRoom)
+                        {
+                            m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
+                        }
                     }
                 }
             }
