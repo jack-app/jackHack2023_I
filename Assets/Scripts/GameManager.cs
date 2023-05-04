@@ -61,12 +61,12 @@ public class GameManager : MonoBehaviourPun
         {
             case 0:
                 enemystatus.GetComponent<ManageMyObj>().DestroyMyObj();
-                FieldManager.Instance.SetPieceToField(piecePos.x, piecePos.y, PhotonNetwork.LocalPlayer.ActorNumber);
+                FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, piecePos.x, piecePos.y);
                 m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
                 break;
             case 1:
                 status.GetComponent<ManageMyObj>().DestroyMyObj();
-                FieldManager.Instance.SetPieceToField(piecePos.x, piecePos.y, PhotonNetwork.LocalPlayer.GetNextFor(PhotonNetwork.LocalPlayer.ActorNumber).ActorNumber);
+                FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.GetNextFor(PhotonNetwork.LocalPlayer.ActorNumber).ActorNumber, piecePos.x, piecePos.y);
                 m_turnManager.SendTurn(); // ターンを次のプレイヤーに渡す
                 break;
             default:
