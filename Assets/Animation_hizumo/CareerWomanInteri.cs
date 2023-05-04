@@ -3,7 +3,7 @@ using UnityEngine;
 public class CareerWomanInteri : MonoBehaviour
 {
     //===== ’è‹`—Ìˆæ =====
-    private Animator anim;  //Animator‚ğanim‚Æ‚¢‚¤•Ï”‚Å’è‹`‚·‚é
+    public Animator anim;  //Animator‚ğanim‚Æ‚¢‚¤•Ï”‚Å’è‹`‚·‚é
     public GameObject conservation;
     public GameObject building;
     //===== ‰Šúˆ— =====
