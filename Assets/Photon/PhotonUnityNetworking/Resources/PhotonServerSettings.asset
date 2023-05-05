@@ -51,6 +51,11 @@ MonoBehaviour:
   - RPC_PlayEffect
   - RPC_WomanInteri
   - RPC_OtakuGal
+  - RPC_SucceessMatching
+  - RPC_OlMajimekun
+  - RPC_Change
+  - RPC_Y0Change
+  - RPC_YLengthChange
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

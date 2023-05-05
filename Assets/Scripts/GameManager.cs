@@ -86,6 +86,13 @@ public class GameManager : MonoBehaviourPun
                 FieldManager.Instance.SetPieceToField(0, piecePos.x, piecePos.y);
                 m_directionManager.WomanInteri();
                 break;
+            case 4:
+                // ^–Ê–Ú‚ÆOL‚Ì‹ì‚¯—‚¿
+                status.GetComponent<ManageMyObj>().DestroyMyObj();
+                enemystatus.GetComponent<ManageMyObj>().DestroyMyObj();
+                FieldManager.Instance.SetPieceToField(0, piecePos.x, piecePos.y);
+                m_directionManager.OlMajimekun();
+                break;
             default:
                 break;
         }

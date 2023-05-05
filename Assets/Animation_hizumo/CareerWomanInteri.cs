@@ -53,4 +53,12 @@ public class CareerWomanInteri : MonoBehaviour
     {
         Instantiate(building, new Vector3(0.0f, 2.77f, 0.0f), Quaternion.identity);
     }
+    
+    public void buildout()
+    {
+        //cbuilding という名前のオブジェクトを取得
+        GameObject building = GameObject.Find("building(Clone)");
+        // 指定したオブジェクトを削除
+        Destroy(building);
+    }
 }

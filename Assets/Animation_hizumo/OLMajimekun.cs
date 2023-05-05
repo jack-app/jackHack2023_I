@@ -54,4 +54,12 @@ public class OLMajimekun
     {
         Instantiate(heart, new Vector3(0.0f, 1.99f, 0.0f), Quaternion.identity);
     }
+    
+    public void loveout()
+    {
+        //love という名前のオブジェクトを取得
+        GameObject love = GameObject.Find("heart_shape-1(Clone)");
+        // 指定したオブジェクトを削除
+        Destroy(love);
+    }
 }

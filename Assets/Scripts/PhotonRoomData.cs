@@ -5,6 +5,7 @@ using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
+using Photon.Pun.Demo.Cockpit;
 
 public class PhotonRoomData : MonoBehaviourPunCallbacks
 {
@@ -26,6 +27,9 @@ public class PhotonRoomData : MonoBehaviourPunCallbacks
     [SerializeField]
     private string m_gameSceneName = "Main";
 
+    [SerializeField]
+    private GameObject m_backButton;
+
     private bool m_joinedRoom = false;
 
     public override void OnJoinedRoom()
@@ -39,15 +43,26 @@ public class PhotonRoomData : MonoBehaviourPunCallbacks
         if (m_joinedRoom)
         {
             m_TextMeshPro.text = "ÉãÅ[ÉÄêlêî: " + PhotonNetwork.PlayerList.Length.ToString();
-            m_matchingText.SetActive(false);
-            m_matchedText.SetActive(true);
-            if (PhotonNetwork.IsMasterClient)
+            m_backButton.SetActive(true);
+            if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
             {
-                m_startButton.SetActive(true);
+                m_matchingText.SetActive(false);
+                m_matchedText.SetActive(true);
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    m_startButton.SetActive(true);
+                }
+                else
+                {
+                    m_waitText.SetActive(true);
+                }
             }
             else
             {
-                m_waitText.SetActive(true);
+                m_matchingText.SetActive(true);
+                m_matchedText.SetActive(false);
+                m_startButton.SetActive(false);
+                m_waitText.SetActive(false);
             }
         }
     }
