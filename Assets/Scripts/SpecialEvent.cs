@@ -1,10 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.Rendering.DebugUI;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class SpecialEvent : MonoBehaviour
 {
@@ -13,6 +9,8 @@ public class SpecialEvent : MonoBehaviour
     public GameObject Letter;
     public GameObject Heart;
     public GameObject Laughed;
+
+    public GameObject ParentObj;
 
     [SerializeField]
     private int resultnumber;
