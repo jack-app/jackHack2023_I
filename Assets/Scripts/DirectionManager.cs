@@ -87,16 +87,16 @@ public class DirectionManager : MonoBehaviourPun
     [PunRPC]
     private void RPC_OtonaOnesanBanddman()
     {
-        m_careerwomanInteriObj.SetActive(true);
-        womanInteri1.StartAnimation();
-        womanInteri2.StartAnimation();
+        m_otonaOnesanBanddmanObj.SetActive(true);
+        m_otonaonesanBandoman1.StartAnimation();
+        m_otonaonesanBandoman2.StartAnimation();
         StartCoroutine(OtonaOnesanBanddmanCorotine());
     }
 
     private IEnumerator OtonaOnesanBanddmanCorotine()
     {
         yield return new WaitForSeconds(5);
-        m_careerwomanInteriObj.SetActive(false);
+        m_otonaOnesanBanddmanObj.SetActive(false);
     }
 
 
