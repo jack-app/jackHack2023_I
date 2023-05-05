@@ -71,6 +71,16 @@ public class RayCastScript : MonoBehaviour
                         Vector3 colliderposition = hitboard.collider.gameObject.transform.position;
                         Vector3 prevposition  = selectedpiece.transform.position;
                         selectedpiece.transform.position = new Vector3(colliderposition.x, colliderposition.y, prevposition.z);
+                        Piece_hizumo piece_Hizumo = selectedpiece.GetComponent<Piece_hizumo>();
+                        if (piece_Hizumo != null)
+                        {                          
+                            (bool, GameObject) obj = piece_Hizumo.Promotion();
+                            Debug.Log(obj);
+                            if (obj.Item1 == true)
+                            {
+                                selectedpiece = obj.Item2;
+                            }
+                        }
                         if (PhotonNetwork.InRoom)
                         {
                             // コマを指す音を鳴らす
@@ -82,6 +92,7 @@ public class RayCastScript : MonoBehaviour
                             // もし二つのコマが同じ位置に来たら
                             if (FieldManager.Instance.CheckBattle(afterpos.x, afterpos.y))
                             {
+                                Debug.Log("selectedpiece" + selectedpiece.name);
                                 m_gameManager.ButtleMove(selectedpiece.GetComponent<CharacterStatus>(), prevposition);
                             }
                             else

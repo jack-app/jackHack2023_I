@@ -66,38 +66,38 @@ public class GameManager : MonoBehaviourPun
         switch (battleresult)
         {
             case 0:
-                enemystatus.GetComponent<ManageMyObj>().DestroyMyObj();
+                enemystatus.GetComponent<ManageMyObj>().DestroyMyObj(RpcTarget.AllViaServer);
                 FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, piecePos.x, piecePos.y);                                
                 break;
             case 1:
-                status.GetComponent<ManageMyObj>().DestroyMyObj();
+                status.GetComponent<ManageMyObj>().DestroyMyObj(RpcTarget.AllViaServer);
                 FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.GetNextFor(PhotonNetwork.LocalPlayer.ActorNumber).ActorNumber, piecePos.x, piecePos.y);
                 break;
             case 2:
                 // オタクとギャル
                 if (status.characterType == CharacterType.Otaku)
                 {
-                    status.GetComponent<ManageMyObj>().DestroyMyObj();
+                    status.GetComponent<ManageMyObj>().DestroyMyObj(RpcTarget.AllViaServer);
                     FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.GetNextFor(PhotonNetwork.LocalPlayer.ActorNumber).ActorNumber, piecePos.x, piecePos.y);
                 }
                 else
                 {
-                    enemystatus.GetComponent<ManageMyObj>().DestroyMyObj();
+                    enemystatus.GetComponent<ManageMyObj>().DestroyMyObj(RpcTarget.AllViaServer);
                     FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, piecePos.x, piecePos.y);
                 }
                 m_directionManager.OtakuGal();
                 break;
             case 3:
                 // インテリとキャリアウーマンの駆け落ち
-                status.GetComponent<ManageMyObj>().DestroyMyObj();
-                enemystatus.GetComponent<ManageMyObj>().DestroyMyObj();
+                status.GetComponent<ManageMyObj>().DestroyMyObj(RpcTarget.AllViaServer);
+                enemystatus.GetComponent<ManageMyObj>().DestroyMyObj(RpcTarget.AllViaServer);
                 FieldManager.Instance.SetPieceToField(0, piecePos.x, piecePos.y);
                 m_directionManager.WomanInteri();
                 break;
             case 4:
                 // 真面目とOLの駆け落ち
-                status.GetComponent<ManageMyObj>().DestroyMyObj();
-                enemystatus.GetComponent<ManageMyObj>().DestroyMyObj();
+                status.GetComponent<ManageMyObj>().DestroyMyObj(RpcTarget.AllViaServer);
+                enemystatus.GetComponent<ManageMyObj>().DestroyMyObj(RpcTarget.AllViaServer);
                 FieldManager.Instance.SetPieceToField(0, piecePos.x, piecePos.y);
                 m_directionManager.OlMajimekun();
                 break;
@@ -105,12 +105,12 @@ public class GameManager : MonoBehaviourPun
                 // おとなお姉さんバンドマン
                 if (status.characterType == CharacterType.BandMan)
                 {
-                    status.GetComponent<ManageMyObj>().DestroyMyObj();
+                    status.GetComponent<ManageMyObj>().DestroyMyObj(RpcTarget.AllViaServer);
                     FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.GetNextFor(PhotonNetwork.LocalPlayer.ActorNumber).ActorNumber, piecePos.x, piecePos.y);
                 }
                 else
                 {
-                    enemystatus.GetComponent<ManageMyObj>().DestroyMyObj();
+                    enemystatus.GetComponent<ManageMyObj>().DestroyMyObj(RpcTarget.AllViaServer);
                     FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, piecePos.x, piecePos.y);
                 }
                 m_directionManager.OtonaOnesanBanddman();
