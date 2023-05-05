@@ -5,6 +5,7 @@ using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
+using Photon.Pun.Demo.Cockpit;
 
 public class PhotonRoomData : MonoBehaviourPunCallbacks
 {
@@ -31,6 +32,10 @@ public class PhotonRoomData : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         m_joinedRoom=true;
+        if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
+        {
+            photonView.RPC(nameof(RPC_SucceessMatching), RpcTarget.AllViaServer);
+        }
     }
 
     // Update is called once per frame
@@ -39,16 +44,21 @@ public class PhotonRoomData : MonoBehaviourPunCallbacks
         if (m_joinedRoom)
         {
             m_TextMeshPro.text = "ÉãÅ[ÉÄêlêî: " + PhotonNetwork.PlayerList.Length.ToString();
-            m_matchingText.SetActive(false);
-            m_matchedText.SetActive(true);
-            if (PhotonNetwork.IsMasterClient)
-            {
-                m_startButton.SetActive(true);
-            }
-            else
-            {
-                m_waitText.SetActive(true);
-            }
+        }
+    }
+
+    [PunRPC]
+    private void RPC_SucceessMatching()
+    {
+        m_matchingText.SetActive(false);
+        m_matchedText.SetActive(true);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            m_startButton.SetActive(true);
+        }
+        else
+        {
+            m_waitText.SetActive(true);
         }
     }
 
