@@ -95,9 +95,9 @@ public class SpecialEvent : MonoBehaviour
                 Otaku.transform.Translate(0.4f, 0f, 0f, Space.World);
                 yield return new WaitForSeconds(0.1f);
             }
-            Gal.SetActive(true);
-            Otaku.SetActive(true);
-            Laughed.SetActive(true);
+            Gal.SetActive(false);
+            Otaku.SetActive(false);
+            Laughed.SetActive(false);
         }
         else
         {
