@@ -113,6 +113,7 @@ public class GameManager : MonoBehaviourPun
                     enemystatus.GetComponent<ManageMyObj>().DestroyMyObj();
                     FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, piecePos.x, piecePos.y);
                 }
+                m_directionManager.OtonaOnesanBanddman();
                 break;
             case 6:
                 // ƒ`ƒƒƒ‰’j‚Æ‚¨Žo‚³‚ñ
@@ -125,6 +126,7 @@ public class GameManager : MonoBehaviourPun
                     FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, prevIntPos.x, prevIntPos.y);
                     FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, piecePos.x, piecePos.y);
                 }
+                m_directionManager.CharaoOnesan();
                 break;
             default:
                 break;
