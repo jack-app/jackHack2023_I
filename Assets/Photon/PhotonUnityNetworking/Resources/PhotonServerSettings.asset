@@ -52,6 +52,7 @@ MonoBehaviour:
   - RPC_WomanInteri
   - RPC_OtakuGal
   - RPC_SucceessMatching
+  - RPC_OlMajimekun
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
