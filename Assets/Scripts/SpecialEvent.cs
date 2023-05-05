@@ -96,6 +96,7 @@ public class SpecialEvent : MonoBehaviour
             Gal.SetActive(false);
             Otaku.SetActive(false);
             Laughed.SetActive(false);
+            ParentObj.SetActive(false);
         }
         else
         {

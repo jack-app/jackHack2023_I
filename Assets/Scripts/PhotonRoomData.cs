@@ -27,15 +27,14 @@ public class PhotonRoomData : MonoBehaviourPunCallbacks
     [SerializeField]
     private string m_gameSceneName = "Main";
 
+    [SerializeField]
+    private GameObject m_backButton;
+
     private bool m_joinedRoom = false;
 
     public override void OnJoinedRoom()
     {
         m_joinedRoom=true;
-        if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
-        {
-            photonView.RPC(nameof(RPC_SucceessMatching), RpcTarget.AllViaServer);
-        }
     }
 
     // Update is called once per frame
@@ -44,21 +43,27 @@ public class PhotonRoomData : MonoBehaviourPunCallbacks
         if (m_joinedRoom)
         {
             m_TextMeshPro.text = "ÉãÅ[ÉÄêlêî: " + PhotonNetwork.PlayerList.Length.ToString();
-        }
-    }
-
-    [PunRPC]
-    private void RPC_SucceessMatching()
-    {
-        m_matchingText.SetActive(false);
-        m_matchedText.SetActive(true);
-        if (PhotonNetwork.IsMasterClient)
-        {
-            m_startButton.SetActive(true);
-        }
-        else
-        {
-            m_waitText.SetActive(true);
+            m_backButton.SetActive(true);
+            if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
+            {
+                m_matchingText.SetActive(false);
+                m_matchedText.SetActive(true);
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    m_startButton.SetActive(true);
+                }
+                else
+                {
+                    m_waitText.SetActive(true);
+                }
+            }
+            else
+            {
+                m_matchingText.SetActive(true);
+                m_matchedText.SetActive(false);
+                m_startButton.SetActive(false);
+                m_waitText.SetActive(false);
+            }
         }
     }
 

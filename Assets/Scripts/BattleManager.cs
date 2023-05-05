@@ -22,13 +22,17 @@ public class BattleManager : MonoBehaviour
     public int Battle(CharacterStatus a, CharacterStatus b)
     {
         //í“¬Žž‚Ìˆ—
-        if(a.characterType == CharacterType.Otaku && b.characterType == CharacterType.Gal)
+        if(a.characterType == CharacterType.Otaku && b.characterType == CharacterType.Gal || a.characterType == CharacterType.Gal && b.characterType == CharacterType.Otaku)
         {
             return 2;
         }
         else if (a.characterType == CharacterType.CareerWoman && b.characterType == CharacterType.Intelli || a.characterType == CharacterType.Intelli && b.characterType == CharacterType.CareerWoman)
         {
             return 3;
+        }
+        else if (a.characterType == CharacterType.Majime && b.characterType == CharacterType.OL || a.characterType == CharacterType.OL && b.characterType == CharacterType.Majime)
+        {
+            return 4;
         }
         else if((a.looks + a.money + a.intelligence + a.communication)* 1.5 >= (b.looks + b.money + b.intelligence + b.communication))
         {
