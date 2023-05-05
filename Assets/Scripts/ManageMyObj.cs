@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class ManageMyObj : MonoBehaviourPun
 {
-    public void DestroyMyObj()
+    public void DestroyMyObj(RpcTarget target)
     {
-        photonView.RPC(nameof(RPC_DestroyMyObj), RpcTarget.AllViaServer);
+        photonView.RPC(nameof(RPC_DestroyMyObj), target);
     }
 
     [PunRPC]
