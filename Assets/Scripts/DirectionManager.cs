@@ -11,6 +11,8 @@ public class DirectionManager : MonoBehaviourPun
     private CareerWomanInteri womanInteri1;
     [SerializeField]
     private CareerWomanInteri womanInteri2;
+    [SerializeField]
+    private GameObject m_otakuGalObj;
 
     public void WomanInteri()
     {       
@@ -30,5 +32,16 @@ public class DirectionManager : MonoBehaviourPun
     {
         yield return new WaitForSeconds(5);
         m_careerwomanInteriObj.SetActive(false);
+    }
+
+    public void OtakuGal()
+    {
+        photonView.RPC(nameof(RPC_OtakuGal), RpcTarget.AllViaServer);
+    }
+
+    [PunRPC]
+    private void RPC_OtakuGal()
+    {
+        m_otakuGalObj.SetActive(true);
     }
 }
