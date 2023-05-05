@@ -34,6 +34,14 @@ public class BattleManager : MonoBehaviour
         {
             return 4;
         }
+        else if (a.characterType == CharacterType.BandMan && b.characterType == CharacterType.OtonaOnesan || a.characterType == CharacterType.OtonaOnesan && b.characterType == CharacterType.BandMan)
+        {
+            return 5;
+        }
+        else if (a.characterType == CharacterType.Charao && b.characterType == CharacterType.Onesan)
+        {
+            return 6;
+        }
         else if((a.looks + a.money + a.intelligence + a.communication)* 1.5 >= (b.looks + b.money + b.intelligence + b.communication))
         {
             return 0;
