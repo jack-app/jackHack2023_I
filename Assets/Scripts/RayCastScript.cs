@@ -16,6 +16,9 @@ public class RayCastScript : MonoBehaviour
     private PhotonViewDetector m_viewDetector;
 
     [SerializeField]
+    private ChangeBoard m_changeBoard;
+
+    [SerializeField]
     private PhotonPlaySE m_photonPlaySE;
 
     private Clickmode clickmode;
@@ -89,6 +92,7 @@ public class RayCastScript : MonoBehaviour
                         }
                     }
                 }
+                m_changeBoard.Change();
                 ableSelect.InActivateBoard();
                 ableSelect = null;
                 selectedpiece = null;
