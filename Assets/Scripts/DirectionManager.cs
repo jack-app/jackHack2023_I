@@ -19,6 +19,14 @@ public class DirectionManager : MonoBehaviourPun
     private OLMajimekun m_oLMajimekun1;
     [SerializeField]
     private OLMajimekun m_olMajimekun2;
+    [SerializeField]
+    private GameObject m_otonaOnesanBanddmanObj;
+    [SerializeField]
+    private OtonaonesanBandoman m_otonaonesanBandoman1;
+    [SerializeField]
+    private OtonaonesanBandoman m_otonaonesanBandoman2;
+    [SerializeField]
+    private GameObject m_charaoOnesanObj;
 
     public void WomanInteri()
     {       
@@ -28,11 +36,6 @@ public class DirectionManager : MonoBehaviourPun
     [PunRPC]
     private void RPC_WomanInteri()
     {
-        if (!PhotonNetwork.IsMasterClient)
-        {
-            Vector3 eulerRot = m_careerwomanInteriObj.transform.eulerAngles;
-            m_careerwomanInteriObj.transform.eulerAngles = new Vector3(eulerRot.x, eulerRot.y, -180);
-        }
         m_careerwomanInteriObj.SetActive(true);
         womanInteri1.StartAnimation();
         womanInteri2.StartAnimation();
@@ -53,11 +56,6 @@ public class DirectionManager : MonoBehaviourPun
     [PunRPC]
     private void RPC_OtakuGal()
     {
-        if (!PhotonNetwork.IsMasterClient)
-        {
-            Vector3 eulerRot = m_otakuGalObj.transform.eulerAngles;
-            m_otakuGalObj.transform.eulerAngles = new Vector3(eulerRot.x, eulerRot.y, -180);
-        }
         m_otakuGalObj.SetActive(true);
     }
 
@@ -69,11 +67,6 @@ public class DirectionManager : MonoBehaviourPun
     [PunRPC]
     private void RPC_OlMajimekun()
     {
-        if (!PhotonNetwork.IsMasterClient)
-        {
-            Vector3 eulerRot = m_careerwomanInteriObj.transform.eulerAngles;
-            m_careerwomanInteriObj.transform.eulerAngles = new Vector3(eulerRot.x, eulerRot.y, -180);
-        }
         m_careerwomanInteriObj.SetActive(true);
         womanInteri1.StartAnimation();
         womanInteri2.StartAnimation();
@@ -84,5 +77,38 @@ public class DirectionManager : MonoBehaviourPun
     {
         yield return new WaitForSeconds(5);
         m_careerwomanInteriObj.SetActive(false);
+    }
+
+    public void OtonaOnesanBanddman()
+    {
+        photonView.RPC(nameof(RPC_OtonaOnesanBanddman), RpcTarget.AllViaServer);
+    }
+
+    [PunRPC]
+    private void RPC_OtonaOnesanBanddman()
+    {
+        m_careerwomanInteriObj.SetActive(true);
+        womanInteri1.StartAnimation();
+        womanInteri2.StartAnimation();
+        StartCoroutine(OtonaOnesanBanddmanCorotine());
+    }
+
+    private IEnumerator OtonaOnesanBanddmanCorotine()
+    {
+        yield return new WaitForSeconds(5);
+        m_careerwomanInteriObj.SetActive(false);
+    }
+
+
+
+    public void CharaoOnesan()
+    {
+        photonView.RPC(nameof(RPC_CharaoOnesan), RpcTarget.AllViaServer);
+    }
+
+    [PunRPC]
+    private void RPC_CharaoOnesan()
+    {
+        m_charaoOnesanObj.SetActive(true);
     }
 }

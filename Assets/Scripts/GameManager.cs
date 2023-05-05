@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviourPun
         }
     }
 
-    public void ButtleMove(CharacterStatus status)
+    public void ButtleMove(CharacterStatus status, Vector3 prevpos)
     {        
         CharacterStatus enemystatus = m_battleManager.SearchEnemy(status);
         if (enemystatus == null) 
@@ -75,8 +75,16 @@ public class GameManager : MonoBehaviourPun
                 break;
             case 2:
                 // オタクとギャル
-                status.GetComponent<ManageMyObj>().DestroyMyObj();
-                FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.GetNextFor(PhotonNetwork.LocalPlayer.ActorNumber).ActorNumber, piecePos.x, piecePos.y);
+                if (status.characterType == CharacterType.Otaku)
+                {
+                    status.GetComponent<ManageMyObj>().DestroyMyObj();
+                    FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.GetNextFor(PhotonNetwork.LocalPlayer.ActorNumber).ActorNumber, piecePos.x, piecePos.y);
+                }
+                else
+                {
+                    enemystatus.GetComponent<ManageMyObj>().DestroyMyObj();
+                    FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, piecePos.x, piecePos.y);
+                }
                 m_directionManager.OtakuGal();
                 break;
             case 3:
@@ -92,6 +100,33 @@ public class GameManager : MonoBehaviourPun
                 enemystatus.GetComponent<ManageMyObj>().DestroyMyObj();
                 FieldManager.Instance.SetPieceToField(0, piecePos.x, piecePos.y);
                 m_directionManager.OlMajimekun();
+                break;
+            case 5:
+                // おとなお姉さんバンドマン
+                if (status.characterType == CharacterType.BandMan)
+                {
+                    status.GetComponent<ManageMyObj>().DestroyMyObj();
+                    FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.GetNextFor(PhotonNetwork.LocalPlayer.ActorNumber).ActorNumber, piecePos.x, piecePos.y);
+                }
+                else
+                {
+                    enemystatus.GetComponent<ManageMyObj>().DestroyMyObj();
+                    FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, piecePos.x, piecePos.y);
+                }
+                m_directionManager.OtonaOnesanBanddman();
+                break;
+            case 6:
+                // チャラ男とお姉さん
+                if (status.characterType == CharacterType.Charao)
+                {
+                    status.transform.position = prevpos;
+                    Vector2Int prevIntPos = FieldManager.Instance.ConvertRealPosToArrayPos(prevpos);
+                    enemystatus.transform.rotation = Quaternion.identity;
+                    enemystatus.gameObject.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
+                    FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, prevIntPos.x, prevIntPos.y);
+                    FieldManager.Instance.SetPieceToField(PhotonNetwork.LocalPlayer.ActorNumber, piecePos.x, piecePos.y);
+                }
+                m_directionManager.CharaoOnesan();
                 break;
             default:
                 break;

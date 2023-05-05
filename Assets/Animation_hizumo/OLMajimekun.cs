@@ -44,15 +44,15 @@ public class OLMajimekun
     }
     public void conservationStart1()
     {
-        Instantiate(conservation, new Vector3(-0.03f, 2.51f, 0.0f), Quaternion.identity);
+        Instantiate(conservation, new Vector3(-0.03f, 2.51f,-3f), Quaternion.identity);
     }
     public void conservationStart2()
     {
-        Instantiate(conservation, new Vector3(4.28f, 2.45f, 0.0f), Quaternion.identity);
+        Instantiate(conservation, new Vector3(4.28f, 2.45f, -3f), Quaternion.identity);
     }
     public void love()
     {
-        Instantiate(heart, new Vector3(0.0f, 1.99f, 0.0f), Quaternion.identity);
+        Instantiate(heart, new Vector3(0.0f, 1.99f, -3f), Quaternion.identity);
     }
     
     public void loveout()

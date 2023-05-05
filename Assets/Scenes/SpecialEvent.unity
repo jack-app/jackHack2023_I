@@ -268,5 +268,74 @@ PrefabInstance:
       propertyPath: m_Name
       value: OtakuGal
       objectReference: {fileID: 0}
+    - target: {fileID: 5648654120742956015, guid: 9a548dcd241d338419ed6bf3c1a9f493, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a548dcd241d338419ed6bf3c1a9f493, type: 3}
+--- !u!1001 &5774680668928788290
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4565065351727901996, guid: 3393eaf9c783e774ab78a78a66a434e0, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5774680669884924456, guid: 3393eaf9c783e774ab78a78a66a434e0, type: 3}
+      propertyPath: m_Name
+      value: CharaoOnesan
+      objectReference: {fileID: 0}
+    - target: {fileID: 5774680669884924457, guid: 3393eaf9c783e774ab78a78a66a434e0, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5774680669884924457, guid: 3393eaf9c783e774ab78a78a66a434e0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5774680669884924457, guid: 3393eaf9c783e774ab78a78a66a434e0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5774680669884924457, guid: 3393eaf9c783e774ab78a78a66a434e0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.000506
+      objectReference: {fileID: 0}
+    - target: {fileID: 5774680669884924457, guid: 3393eaf9c783e774ab78a78a66a434e0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5774680669884924457, guid: 3393eaf9c783e774ab78a78a66a434e0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5774680669884924457, guid: 3393eaf9c783e774ab78a78a66a434e0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5774680669884924457, guid: 3393eaf9c783e774ab78a78a66a434e0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5774680669884924457, guid: 3393eaf9c783e774ab78a78a66a434e0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5774680669884924457, guid: 3393eaf9c783e774ab78a78a66a434e0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5774680669884924457, guid: 3393eaf9c783e774ab78a78a66a434e0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6544001119777216640, guid: 3393eaf9c783e774ab78a78a66a434e0, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3393eaf9c783e774ab78a78a66a434e0, type: 3}

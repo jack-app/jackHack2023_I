@@ -82,7 +82,7 @@ public class RayCastScript : MonoBehaviour
                             // ‚à‚µ“ñ‚Â‚ÌƒRƒ}‚ª“¯‚¶ˆÊ’u‚É—ˆ‚½‚ç
                             if (FieldManager.Instance.CheckBattle(afterpos.x, afterpos.y))
                             {
-                                m_gameManager.ButtleMove(selectedpiece.GetComponent<CharacterStatus>());
+                                m_gameManager.ButtleMove(selectedpiece.GetComponent<CharacterStatus>(), prevposition);
                             }
                             else
                             {
