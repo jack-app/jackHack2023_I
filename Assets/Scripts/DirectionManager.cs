@@ -36,11 +36,6 @@ public class DirectionManager : MonoBehaviourPun
     [PunRPC]
     private void RPC_WomanInteri()
     {
-        //if (!PhotonNetwork.IsMasterClient)
-        //{
-        //    Vector3 eulerRot = m_careerwomanInteriObj.transform.eulerAngles;
-        //    m_careerwomanInteriObj.transform.eulerAngles = new Vector3(eulerRot.x, eulerRot.y, -180);
-        //}
         m_careerwomanInteriObj.SetActive(true);
         womanInteri1.StartAnimation();
         womanInteri2.StartAnimation();
@@ -61,11 +56,6 @@ public class DirectionManager : MonoBehaviourPun
     [PunRPC]
     private void RPC_OtakuGal()
     {
-        //if (!PhotonNetwork.IsMasterClient)
-        //{
-        //    Vector3 eulerRot = m_otakuGalObj.transform.eulerAngles;
-        //    m_otakuGalObj.transform.eulerAngles = new Vector3(eulerRot.x, eulerRot.y, -180);
-        //}
         m_otakuGalObj.SetActive(true);
     }
 
@@ -77,11 +67,6 @@ public class DirectionManager : MonoBehaviourPun
     [PunRPC]
     private void RPC_OlMajimekun()
     {
-        //if (!PhotonNetwork.IsMasterClient)
-        //{
-        //    Vector3 eulerRot = m_careerwomanInteriObj.transform.eulerAngles;
-        //    m_careerwomanInteriObj.transform.eulerAngles = new Vector3(eulerRot.x, eulerRot.y, -180);
-        //}
         m_careerwomanInteriObj.SetActive(true);
         womanInteri1.StartAnimation();
         womanInteri2.StartAnimation();
@@ -102,11 +87,6 @@ public class DirectionManager : MonoBehaviourPun
     [PunRPC]
     private void RPC_OtonaOnesanBanddman()
     {
-        //if (!PhotonNetwork.IsMasterClient)
-        //{
-        //    Vector3 eulerRot = m_careerwomanInteriObj.transform.eulerAngles;
-        //    m_careerwomanInteriObj.transform.eulerAngles = new Vector3(eulerRot.x, eulerRot.y, -180);
-        //}
         m_careerwomanInteriObj.SetActive(true);
         womanInteri1.StartAnimation();
         womanInteri2.StartAnimation();
@@ -129,11 +109,6 @@ public class DirectionManager : MonoBehaviourPun
     [PunRPC]
     private void RPC_CharaoOnesan()
     {
-        //if (!PhotonNetwork.IsMasterClient)
-        //{
-        //    Vector3 eulerRot = m_otakuGalObj.transform.eulerAngles;
-        //    m_charaoOnesanObj.transform.eulerAngles = new Vector3(eulerRot.x, eulerRot.y, -180);
-        //}
         m_charaoOnesanObj.SetActive(true);
     }
 }
