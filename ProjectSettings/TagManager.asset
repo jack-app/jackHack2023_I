@@ -10,6 +10,7 @@ TagManager:
   - Move
   - NotBoard
   - Change
+  - money
   layers:
   - Default
   - TransparentFX
